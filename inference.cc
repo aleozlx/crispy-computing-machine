@@ -7,28 +7,6 @@
 
 typedef std::vector<std::pair<std::string, tensorflow::Tensor>> tensor_dict;
 
-/**
- * @brief load a previous store model
- * @details [long description]
- *
- * in Python run:
- *
- *    saver = tf.train.Saver(tf.global_variables())
- *    saver.save(sess, './exported/my_model')
- *    tf.train.write_graph(sess.graph, '.', './exported/graph.pb, as_text=False)
- *
- * this relies on a graph which has an operation called `init` responsible to
- * initialize all variables, eg.
- *
- *    sess.run(tf.global_variables_initializer())  # somewhere in the python
- * file
- *
- * @param sess active tensorflow session
- * @param graph_fn path to graph file (eg. "./exported/graph.pb")
- * @param checkpoint_fn path to checkpoint file (eg. "./exported/my_model",
- * optional)
- * @return status of reloading
- */
 tensorflow::Status LoadModel(tensorflow::Session *sess, std::string graph_fn,
                              std::string checkpoint_fn = "") {
   tensorflow::Status status;
@@ -66,8 +44,8 @@ tensorflow::Status LoadModel(tensorflow::Session *sess, std::string graph_fn,
 }
 
 int main(int argc, char const *argv[]) {
-  const std::string graph_fn = "./exported/my_model.meta";
-  const std::string checkpoint_fn = "./exported/my_model";
+  const std::string graph_fn = "../exported/my_model.meta";
+  const std::string checkpoint_fn = "../exported/my_model";
 
   // prepare session
   tensorflow::Session *sess;
